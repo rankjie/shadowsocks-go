@@ -5,7 +5,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
+	ss "github.com/rankjie/shadowsocks-go/shadowsocks"
 	"io"
 	"log"
 	"math/rand"
@@ -317,12 +317,12 @@ func handleConnection(conn net.Conn) {
 	debug.Println("closed connection to", addr)
 }
 
-func run(port string) {
-	ln, err := net.Listen("tcp", ":"+port)
+func run(port string, localAddr string) {
+	ln, err := net.Listen("tcp", localAddr+":"+port)
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("starting local socks5 server at port %v ...\n", port)
+	log.Printf("starting socks5 server on "+localArr+" at port %v ...\n", port)
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
@@ -341,7 +341,7 @@ func enoughOptions(config *ss.Config) bool {
 func main() {
 	log.SetOutput(os.Stdout)
 
-	var configFile, cmdServer string
+	var configFile, cmdServer, cmdLocalAddress string
 	var cmdConfig ss.Config
 	var printVer bool
 
@@ -350,6 +350,7 @@ func main() {
 	flag.StringVar(&cmdServer, "s", "", "server address")
 	flag.StringVar(&cmdConfig.Password, "k", "", "password")
 	flag.IntVar(&cmdConfig.ServerPort, "p", 0, "server port")
+	flag.StringVar(&cmdLocalAddress, "i", "", "IP address to listen on")
 	flag.IntVar(&cmdConfig.LocalPort, "l", 0, "local socks5 proxy port")
 	flag.StringVar(&cmdConfig.Method, "m", "", "encryption method, use empty string or rc4")
 	flag.BoolVar((*bool)(&debug), "d", false, "print debug message")
@@ -402,5 +403,5 @@ func main() {
 
 	parseServerConfig(config)
 
-	run(strconv.Itoa(config.LocalPort))
+	run(cmdLocalAddress, strconv.Itoa(config.LocalPort))
 }
