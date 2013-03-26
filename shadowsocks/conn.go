@@ -77,6 +77,6 @@ func (c Conn) Write(b []byte) (n int, err error) {
 	cipherData := make([]byte, len(b), len(b))
 	c.Encrypt(cipherData, b)
 	n, err = c.Conn.Write(cipherData)
-	print cipherData.length
+	fmt.Fprintf(os.Stderr, cipherData.length)
 	return
 }
