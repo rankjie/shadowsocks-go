@@ -317,7 +317,7 @@ func handleConnection(conn net.Conn) {
 	debug.Println("closed connection to", addr)
 }
 
-func run(port string, localAddr string) {
+func run(localAddr string, port string) {
 	ln, err := net.Listen("tcp", localAddr+":"+port)
 	if err != nil {
 		log.Fatal(err)
