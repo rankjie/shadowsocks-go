@@ -5,7 +5,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	ss "github.com/rankjie/shadowsocks-go/shadowsocks"
+	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
 	"io"
 	"log"
 	"math/rand"
@@ -322,7 +322,7 @@ func run(port string, localAddr string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("starting socks5 server on "+localArr+" at port %v ...\n", port)
+	log.Printf("starting socks5 server on "+localAddr+" at port %v ...\n", port)
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
