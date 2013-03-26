@@ -20,6 +20,7 @@ import (
 type Config struct {
 	Server     interface{} `json:"server"`
 	ServerPort int         `json:"server_port"`
+	LocalAddress	interface{} `json:"local_address"`
 	LocalPort  int         `json:"local_port"`
 	Password   string      `json:"password"`
 	Method     string      `json:"method"` // encryption method
