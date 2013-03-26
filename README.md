@@ -1,6 +1,6 @@
 # shadowsocks-go
 
-Current version: 0.6.2 [![Build Status](https://travis-ci.org/shadowsocks/shadowsocks-go.png?branch=master)](https://travis-ci.org/shadowsocks/shadowsocks-go)
+Current version: 0.6.2.1
 
 shadowsocks-go is a lightweight tunnel proxy which can help you get through firewalls. It is a port of [shadowsocks](https://github.com/clowwindy/shadowsocks).
 
@@ -16,9 +16,9 @@ You can also install from source (assume you have go installed):
 
 ```
 # on server
-go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server
+go get github.com/rankjie/shadowsocks-go/cmd/shadowsocks-server
 # on client
-go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local
+go get github.com/rankjie/shadowsocks-go/cmd/shadowsocks-local
 ```
 
 It's recommend to disable cgo when compiling shadowsocks-go. This will prevent the go runtime from creating too many threads for dns lookup.
@@ -32,6 +32,7 @@ Configuration file is in json format and has the same syntax with [shadowsocks-n
 ```
 server          your server ip or hostname
 server_port     server port
+local_addr      local IP to listen on
 local_port      local socks5 proxy port
 method          encryption method, null by default, or use "rc4"
 password        a password used to encrypt transfer
